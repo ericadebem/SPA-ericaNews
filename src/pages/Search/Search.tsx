@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { searchPosts } from "../../services/postsServices";
+import { searchPosts } from "../../Services/postsServices.tsx";
 import { ContainerResults, SearchPosts, TextResults } from "./SearchStyled";
 import { Card } from "../../components/Card/Card";
 

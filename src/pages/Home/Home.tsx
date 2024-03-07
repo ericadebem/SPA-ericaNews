@@ -1,28 +1,14 @@
 import { useState, useEffect } from "react";
+
 import { Card } from "../../components/Card/Card";
+// import { Navbar } from "../../components/Navbar/Navbar.tsx";
 import { getAllPosts, getTopPost } from "../../Services/postsServices.tsx";
 import { HomeBody, HomeHeader } from "./HomeStyled";
+// import Cookies from "js-cookie";
 
-
-interface Post {
-  id: number;
-  title: string;
-  text: string;
-  banner: string;
-  likes: number;
-  comments: string;
-}
-
-export function Home() {
+export const Home = () => {
   const [posts, setPosts] = useState([]);
-  const [topPost, setTopPost] = useState<Post>({
-    id: 0,
-    title: "",
-    text: "",
-    banner: "",
-    likes: 0,
-    comments: ""
-  });
+  const [topPost, setTopPost] = useState({});
 
   async function findPost() {
     const postsResponse = await getAllPosts();
