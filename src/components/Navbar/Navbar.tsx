@@ -1,4 +1,4 @@
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, Search, useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from "../../img/logoEN.png";
 import {
@@ -18,6 +18,10 @@ import Cookies from "js-cookie";
 import { UserContext } from "../../Context/UserContext.tsx";
 
 
+interface SearchData {
+  title: string;
+}
+
 
 export function Navbar() {
   const {
@@ -31,7 +35,7 @@ export function Navbar() {
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
 
-  function onSearch(data) {
+  function onSearch(data: SearchData) {
     const { title } = data;
     navigate(`/search/${title}`);
     reset();
@@ -53,8 +57,8 @@ export function Navbar() {
 
   useEffect(() => {
     if (Cookies.get("token")) findUserLogged();
-  }, []);
-
+  }, [findUserLogged]);
+  
   return (
     <>
       <Nav>
