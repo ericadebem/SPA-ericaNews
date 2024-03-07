@@ -3,8 +3,8 @@ import { z } from "zod";
 export const searchSchema = z.object({
   title: z
     .string()
-    .nonempty({ message: "A pesquisa não pode ser vazia" })
+    .nonempty({ message: "Search cannot be empty" })
     .refine((value) => !/^\s*$/.test(value), {
-      message: "A pesquisa não ter apenas espaços",
+      message: "The search does not just have spaces",
     }),
 });

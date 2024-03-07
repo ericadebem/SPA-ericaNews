@@ -13,7 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../Button/Button.tsx";
 import { searchSchema } from "../../schemas/searchSchema.tsx";
 import { userLogged } from "../../Services/userServices.tsx";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import Cookies from "js-cookie";
 import { UserContext } from "../../Context/UserContext.tsx";
 
@@ -92,7 +92,9 @@ export function Navbar() {
           </Link>
         )}
       </Nav>
-      {errors.title && <ErrorSpan>{errors.title.message}</ErrorSpan>}
+      {errors.title && typeof errors.title.message === 'string' && (
+  <ErrorSpan>{errors.title.message}</ErrorSpan>
+)}
       <Outlet />
     </>
   );
