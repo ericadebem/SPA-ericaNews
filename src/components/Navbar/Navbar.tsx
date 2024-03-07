@@ -1,4 +1,5 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from "../../img/logoEN.png";
 import {
   ErrorSpan,
@@ -15,6 +16,8 @@ import { userLogged } from "../../Services/userServices.tsx";
 import { useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { UserContext } from "../../Context/UserContext.tsx";
+
+
 
 export function Navbar() {
   const {
@@ -64,13 +67,13 @@ export function Navbar() {
             <input
               {...register("title")}
               type="text"
-              placeholder="Pesquise por um título"
+              placeholder="Search for a title"
             />
           </InputSpace>
         </form>
 
         <Link to="/">
-          <ImageLogo src={logo} alt="Logo do Breaking News" />
+          <ImageLogo src={logo} alt="Logo Erica News" />
         </Link>
 
         {user ? (
@@ -83,7 +86,7 @@ export function Navbar() {
           </UserLoggedSpace>
         ) : (
           <Link to="/auth">
-            <Button type="button" text="Entrar">
+            <Button type="button" text="Enter">
               Entrar
             </Button>
           </Link>

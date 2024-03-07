@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const ButtonSpace = styled.button`
-  background-color: #0bade3;
+  background-color: #7ca4d4;
   border: none;
   outline: none;
   font-size: 1rem;
   padding: 0.4rem 1rem;
-  color: #fff;
+  color: #3b74c3;
   transition: all 0.4s ease-in-out;
   cursor: pointer;
   border-radius: 0.3rem;

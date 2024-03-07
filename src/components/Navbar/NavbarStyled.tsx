@@ -8,7 +8,7 @@ export const Nav = styled.nav`
   padding: 1rem;
   /* position: fixed;
   top: 0; */
-  background-color: #fff;
+  background-color: #044cac;
   z-index: 1;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
 `;
