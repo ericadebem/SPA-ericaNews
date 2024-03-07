@@ -1,4 +1,4 @@
-import { Link, Outlet, Search, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from "../../img/logoEN.png";
 import {
@@ -8,20 +8,18 @@ import {
   Nav,
   UserLoggedSpace,
 } from "./NavbarStyled.tsx";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../Button/Button.tsx";
 import { searchSchema } from "../../schemas/searchSchema.tsx";
 import { userLogged } from "../../Services/userServices.tsx";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useCallback } from "react";
 import Cookies from "js-cookie";
 import { UserContext } from "../../Context/UserContext.tsx";
-
 
 interface SearchData {
   title: string;
 }
-
 
 export function Navbar() {
   const {
@@ -33,21 +31,32 @@ export function Navbar() {
     resolver: zodResolver(searchSchema),
   });
   const navigate = useNavigate();
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext) as {
+    user: User | undefined;
+    setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
+  };
 
-  function onSearch(data: SearchData) {
+  const onSearch: SubmitHandler<SearchData> = (data) => {
     const { title } = data;
     navigate(`/search/${title}`);
     reset();
-  }
-  async function findUserLogged() {
+  };
+
+  const findUserLogged = useCallback(async () => {
     try {
       const response = await userLogged();
       setUser(response.data);
     } catch (error) {
       console.log(error);
     }
-  }
+  }, [setUser]);
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (token) {
+      findUserLogged();
+    }
+  }, [findUserLogged]);
 
   function signout() {
     Cookies.remove("token");
@@ -55,10 +64,6 @@ export function Navbar() {
     navigate("/");
   }
 
-  useEffect(() => {
-    if (Cookies.get("token")) findUserLogged();
-  }, [findUserLogged]);
-  
   return (
     <>
       <Nav>
@@ -97,8 +102,8 @@ export function Navbar() {
         )}
       </Nav>
       {errors.title && typeof errors.title.message === 'string' && (
-  <ErrorSpan>{errors.title.message}</ErrorSpan>
-)}
+        <ErrorSpan>{errors.title.message}</ErrorSpan>
+      )}
       <Outlet />
     </>
   );
