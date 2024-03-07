@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { Button } from "../../components/Button/Button.tsx";
 import { Input } from "../../components/Input/Input.tsx";
-import { AuthContainer, Section } from "./AuthenticationStyled.tsx";
+import { AuthContainer, Section } from "./AuthenticationStyled.tsx"; // Aqui está a correção
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signinSchema } from "../../schemas/singinSchema.tsx";
 import { ErrorSpan } from "../../components/Navbar/NavbarStyled.tsx";
@@ -9,10 +9,16 @@ import { signupSchema } from "../../schemas/signupSchema.tsx";
 import { signin, signup } from "../../Services/userServices.tsx";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
+
+export const StyledSection = styled.div<{ type?: string }>`
+`;
+
 
 export function Authentication() {
   const navigate = useNavigate();
-  
+
   const {
     register: registerSignup,
     handleSubmit: handleSubmitSignup,
@@ -84,6 +90,7 @@ export function Authentication() {
           {errorsSignup.name && (
             <ErrorSpan>{errorsSignup.name.message}</ErrorSpan>
           )}
+
           <Input
             type="email"
             placeholder="E-mail"

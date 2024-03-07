@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface SectionProps {
+  type?: string;
+}
+
 export const AuthContainer = styled.div`
   height: 100vh;
   display: flex;
@@ -16,7 +20,7 @@ export const AuthContainer = styled.div`
   }
 `;
 
-export const Section = styled.section`
+export const Section = styled.section<SectionProps>`  
   display: flex;
   flex-direction: column;
   justify-content: center;
