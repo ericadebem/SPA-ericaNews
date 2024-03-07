@@ -29,7 +29,7 @@ export function userLogged() {
   return response;
 }
 
-function generateUserName(name) {
+function generateUserName(name: string) {
   const nameLowerCaseWithoutSpaces = name.replace(/\s/g, "").toLowerCase();
   const randomNumber = Math.floor(Math.random() * 1000);
   return `${nameLowerCaseWithoutSpaces}-${randomNumber}`;
