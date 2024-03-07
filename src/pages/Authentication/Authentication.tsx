@@ -11,6 +11,8 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
 export function Authentication() {
+  const navigate = useNavigate();
+  
   const {
     register: registerSignup,
     handleSubmit: handleSubmitSignup,
@@ -23,7 +25,7 @@ export function Authentication() {
     formState: { errors: errorsSignin },
   } = useForm({ resolver: zodResolver(signinSchema) });
 
-  async function inHanleSubmit(data) {
+  async function inHandleSubmit(data) {
     try {
       const response = await signin(data);
       Cookies.set("token", response.data, { expires: 1 });
@@ -33,9 +35,7 @@ export function Authentication() {
     }
   }
 
-  const navigate = useNavigate();
-
-  async function upHanleSubmit(data) {
+  async function upHandleSubmit(data) {
     try {
       const response = await signup(data);
       Cookies.set("token", response.data, { expires: 1 });
@@ -49,7 +49,7 @@ export function Authentication() {
     <AuthContainer>
       <Section type="signin">
         <h2>Entrar</h2>
-        <form onSubmit={handleSubmitSignin(inHanleSubmit)}>
+        <form onSubmit={handleSubmitSignin(inHandleSubmit)}>
           <Input
             type="email"
             placeholder="E-mail"
@@ -74,7 +74,7 @@ export function Authentication() {
 
       <Section type="signup">
         <h2>Cadastrar</h2>
-        <form onSubmit={handleSubmitSignup(upHanleSubmit)}>
+        <form onSubmit={handleSubmitSignup(upHandleSubmit)}>
           <Input
             type="text"
             placeholder="Nome"
@@ -100,7 +100,7 @@ export function Authentication() {
             register={registerSignup}
           />
           {errorsSignup.password && (
-            <ErrorSpan>{errorsSignin.password.message}</ErrorSpan>
+            <ErrorSpan>{errorsSignup.password.message}</ErrorSpan>
           )}
           <Input
             type="password"
